@@ -1,3 +1,40 @@
+// Creating task object
+const task = {
+    title: "",
+    description: ""
+};
+
+// task object constructor
+function Task(title, description) {
+    this.title = title;
+    this.description = description;
+};
+
+Task.prototype.toString = function() {
+    return `task title is "${this.title}".
+    task description is "${this.description}".`;
+};
+
+let taskArray = [];
+
+const addTask = (taskArray = []) => {
+    const taskTitle = prompt("Enter the task title:");
+    const taskDescription = prompt("Enter the task description:");
+
+    let taskObject = new Task(taskTitle, taskDescription);
+
+    taskArray.push(taskObject);
+};
+
+const viewTask = () => {
+    if (taskArray.length === 0) {
+        console.log("No tasks available.");
+    } else {
+        taskArray.forEach((task, index) => {
+            console.log(`Task ${index + 1}:\n${task.toString()}`);
+        });
+    }
+};
 
 const menu = `Task Manager Menu:
     1. Add Task
@@ -5,7 +42,7 @@ const menu = `Task Manager Menu:
     3. Toggle Task Completion
     4. Edit Task
     5. Delete Task
-    6. Exit`
+    6. Exit`;
 
 let flag = true; 
 
@@ -15,8 +52,10 @@ do {
     
     switch (toDoNumber) {
         case 1:
+            addTask(taskArray);
             break;
         case 2:
+            viewTask(taskArray);
             break;
         case 3:
             break;
