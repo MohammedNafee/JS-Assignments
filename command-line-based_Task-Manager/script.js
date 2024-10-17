@@ -10,18 +10,14 @@ function Task(title, description) {
     this.description = description;
 };
 
-Task.prototype.toString = function() {
-    return `task title is "${this.title}".
-    task description is "${this.description}".`;
-};
+// initialize array of task objects
+const taskArray = [];
 
-let taskArray = [];
-
-const addTask = (taskArray = []) => {
+const addTask = () => {
     const taskTitle = prompt("Enter the task title:");
     const taskDescription = prompt("Enter the task description:");
 
-    let taskObject = new Task(taskTitle, taskDescription);
+    const taskObject = new Task(taskTitle, taskDescription);
 
     taskArray.push(taskObject);
 };
@@ -31,7 +27,11 @@ const viewTask = () => {
         console.log("No tasks available.");
     } else {
         taskArray.forEach((task, index) => {
-            console.log(`Task ${index + 1}:\n${task.toString()}`);
+            console.log(
+                `Task ${index + 1} => 
+                task title: ${task.title}
+                task description: ${task.description}`
+            );
         });
     }
 };
