@@ -69,6 +69,34 @@ class TaskManager {
             
         }
     }
+
+    // delete task
+    deleteTask() {
+        const taskID = parseInt(prompt("Enter the task ID to delete:"));
+        const taskIndex = this.taskArray.findIndex(task => task.taskID === taskID);
+
+        if (taskIndex !== -1) {
+            const deletedTask = this.taskArray.splice(taskIndex, 1)[0];
+            console.log(`Task "${deletedTask.title}" has been deleted.`);
+        } else {
+            console.log("Task not found!");
+        }
+    }
+
+    // search tasks by title
+    searchTasksByTitle() {
+        const title = prompt("Enter the task title to search:");
+        const machingTasks = this.taskArray.filter(task => task.title.toLowerCase() === title.toLowerCase() ? true : false);
+
+        if (machingTasks.length > 0) {
+            console.log("Maching Tasks:");
+            machingTasks.forEach(task => {
+                console.log(`${task.taskID}. ${task.title} => ${task.description} [${task.completed ? "Completed" : "Not Completed"}]`)
+            });
+        } else {
+            console.log("No tasks found with that title!");
+        }
+    }
 }
 
 const menu = `Task Manager Menu:
@@ -77,7 +105,8 @@ const menu = `Task Manager Menu:
     3. Toggle Task Completion
     4. Edit Task
     5. Delete Task
-    6. Exit`;
+    6. Search Task by Title
+    7. Exit`;
 
 const taskManager = new TaskManager();
 
@@ -101,12 +130,18 @@ do {
             taskManager.editTask();
             break;
         case 5:
+            taskManager.deleteTask();
             break;
         case 6:
+            taskManager.searchTasksByTitle();
+            break;
+        case 7:
             flag = false;
+            console.log("");
+            
             break;
         default:
-            console.log("Invalid choice. Please enter a number between 1 and 6.");
+            console.log("Invalid choice. Please enter a number between 1 and 7.");
             break;
     }
     
