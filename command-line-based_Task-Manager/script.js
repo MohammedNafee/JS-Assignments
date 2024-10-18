@@ -1,40 +1,56 @@
-// Creating task object
-const task = {
-    title: "",
-    description: ""
-};
-
-// task object constructor
-function Task(title, description) {
-    this.title = title;
-    this.description = description;
-};
-
-// initialize array of task objects
-const taskArray = [];
-
-const addTask = () => {
-    const taskTitle = prompt("Enter the task title:");
-    const taskDescription = prompt("Enter the task description:");
-
-    const taskObject = new Task(taskTitle, taskDescription);
-
-    taskArray.push(taskObject);
-};
-
-const viewTask = () => {
-    if (taskArray.length === 0) {
-        console.log("No tasks available.");
-    } else {
-        taskArray.forEach((task, index) => {
-            console.log(
-                `Task ${index + 1} => 
-                task title: ${task.title}
-                task description: ${task.description}`
-            );
-        });
+// creating task object
+class Task {
+    constructor(title, description) {
+        this.taskID = 0;
+        this.title = title;
+        this.description = description;
+        this.completed = false;
     }
-};
+}
+
+class TaskManager {
+    constructor() {
+        this.taskArray = [];
+        this.taskCounter = 1; // Keep track of task IDs
+    }
+
+    // display tasks
+    viewTasks() {
+        if (this.taskArray.length === 0) {
+            console.log("No tasks available.");
+        } else {
+            console.log("Tasks:");
+            this.taskArray.forEach((task) => {
+                console.log(`${task.taskID}. ${task.title} => ${task.description} [${task.completed ? "Completed" : "Not Completed"}]`);
+            });
+        }
+    }
+
+    // add new task
+    addTask() {
+        const taskTitle = prompt("Enter the task title:");
+        const taskDescription = prompt("Enter the task description:");
+    
+        const taskObject = new Task(taskTitle, taskDescription);
+        taskObject.taskID = this.taskCounter++;
+    
+        this.taskArray.push(taskObject);
+        console.log(`"${taskObject.title}" task was added successfully`);
+    }
+
+    // toggle task completion
+    toggleCompletion() {
+        const taskID = parseInt(prompt("Enter the task ID to toggle completion:"));
+        const task = this.taskArray.find(task => task.taskID === taskID);
+
+        if (task) {
+            task.completed = !task.completed;
+            console.log(`Task "${task.title}" completion status has been toggled.`);
+        } else {
+            console.log("Task not found.");
+        }
+    }
+}
 
 const menu = `Task Manager Menu:
     1. Add Task
@@ -44,6 +60,8 @@ const menu = `Task Manager Menu:
     5. Delete Task
     6. Exit`;
 
+const taskManager = new TaskManager();
+
 let flag = true; 
 
 do {
@@ -52,12 +70,13 @@ do {
     
     switch (toDoNumber) {
         case 1:
-            addTask(taskArray);
+            taskManager.addTask();
             break;
         case 2:
-            viewTask(taskArray);
+            taskManager.viewTasks();
             break;
         case 3:
+            taskManager.toggleCompletion();
             break;
         case 4:
             break;
