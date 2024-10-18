@@ -47,7 +47,26 @@ class TaskManager {
             task.completed = !task.completed;
             console.log(`Task "${task.title}" completion status has been toggled.`);
         } else {
-            console.log("Task not found.");
+            console.log("Task not found!");
+        }
+    }
+
+    // edit tasks
+    editTask() {
+        const taskID = parseInt(prompt("Enter the task ID to edit:"));
+        const task = this.taskArray.find(task => this.taskID === taskID);
+
+        if (task) {
+            const newTitle = prompt("Enter new task title:", task.title);
+            const newDescription = prompt("Enter new task description:", task.description);
+
+            task.title = newTitle;
+            task.description = newDescription;
+
+            console.log(`Task "${task.title}" has been updated.`);
+        } else {
+            console.log("Task not found!");
+            
         }
     }
 }
@@ -79,6 +98,7 @@ do {
             taskManager.toggleCompletion();
             break;
         case 4:
+            taskManager.editTask();
             break;
         case 5:
             break;
