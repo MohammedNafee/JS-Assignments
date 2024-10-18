@@ -24,7 +24,7 @@ class TaskManager {
     // Load tasks from local storage
     loadTasks() {
         const tasksFromStorage = localStorage.getItem("tasks");
-        const counterFromStorage = localStorage.getItem("tasksCounter");
+        const counterFromStorage = localStorage.getItem("taskCounter");
         
         if (tasksFromStorage) {
             this.taskArray = JSON.parse(tasksFromStorage);
@@ -119,7 +119,9 @@ class TaskManager {
     // search tasks by title
     searchTasksByTitle() {
         const title = prompt("Enter the task title to search:").trim();
-        const machingTasks = this.taskArray.filter(task => task.title.toLowerCase() === title.toLowerCase() ? true : false);
+        const machingTasks = this.taskArray.filter(task => 
+            task.title.toLowerCase() === title.toLowerCase()
+        );
 
         if (machingTasks.length > 0) {
             console.log("Maching Tasks:");
