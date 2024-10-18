@@ -114,7 +114,7 @@ let flag = true;
 
 do {
     console.log(menu);
-    let toDoNumber = parseInt(prompt("Enter your choice (1-6)"));
+    let toDoNumber = parseInt(prompt("Enter your choice (1-7)"));
     
     switch (toDoNumber) {
         case 1:
@@ -137,7 +137,7 @@ do {
             break;
         case 7:
             flag = false;
-            console.log("");
+            console.log("Exiting Task Manager...");
             
             break;
         default:
