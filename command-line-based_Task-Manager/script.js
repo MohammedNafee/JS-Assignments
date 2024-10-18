@@ -28,8 +28,8 @@ class TaskManager {
 
     // add new task
     addTask() {
-        const taskTitle = prompt("Enter the task title:");
-        const taskDescription = prompt("Enter the task description:");
+        const taskTitle = prompt("Enter the task title:").trim();
+        const taskDescription = prompt("Enter the task description:").trim();
     
         const taskObject = new Task(taskTitle, taskDescription);
         taskObject.taskID = this.taskCounter++;
@@ -57,8 +57,8 @@ class TaskManager {
         const task = this.taskArray.find(task => task.taskID === taskID);
 
         if (task) {
-            const newTitle = prompt("Enter new task title:", task.title);
-            const newDescription = prompt("Enter new task description:", task.description);
+            const newTitle = prompt("Enter new task title:", task.title).trim();
+            const newDescription = prompt("Enter new task description:", task.description).trim();
 
             task.title = newTitle;
             task.description = newDescription;
@@ -85,7 +85,7 @@ class TaskManager {
 
     // search tasks by title
     searchTasksByTitle() {
-        const title = prompt("Enter the task title to search:");
+        const title = prompt("Enter the task title to search:").trim();
         const machingTasks = this.taskArray.filter(task => task.title.toLowerCase() === title.toLowerCase() ? true : false);
 
         if (machingTasks.length > 0) {
