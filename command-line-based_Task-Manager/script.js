@@ -54,7 +54,7 @@ class TaskManager {
     // edit tasks
     editTask() {
         const taskID = parseInt(prompt("Enter the task ID to edit:"));
-        const task = this.taskArray.find(task => this.taskID === taskID);
+        const task = this.taskArray.find(task => task.taskID === taskID);
 
         if (task) {
             const newTitle = prompt("Enter new task title:", task.title);
