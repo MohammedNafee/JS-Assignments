@@ -12,6 +12,27 @@ class TaskManager {
     constructor() {
         this.taskArray = [];
         this.taskCounter = 1; // Keep track of task IDs
+        this.loadTasks(); // Load tasks when the app starts
+    }
+
+    // Save tasks to local storage
+    saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(this.taskArray));
+        localStorage.setItem("taskCounter", this.taskCounter.toString());
+    }
+
+    // Load tasks from local storage
+    loadTasks() {
+        const tasksFromStorage = localStorage.getItem("tasks");
+        const counterFromStorage = localStorage.getItem("tasksCounter");
+        
+        if (tasksFromStorage) {
+            this.taskArray = JSON.parse(tasksFromStorage);
+        }
+
+        if (counterFromStorage) {
+            this.taskCounter = parseInt(counterFromStorage, 10);
+        }
     }
 
     // display tasks
@@ -36,6 +57,9 @@ class TaskManager {
     
         this.taskArray.push(taskObject);
         console.log(`"${taskObject.title}" task was added successfully`);
+
+        // Save after adding task
+        this.saveTasks();
     }
 
     // toggle task completion
@@ -46,6 +70,9 @@ class TaskManager {
         if (task) {
             task.completed = !task.completed;
             console.log(`Task "${task.title}" completion status has been toggled.`);
+            
+            // Save after toggling completion
+            this.saveTasks();
         } else {
             console.log("Task not found!");
         }
@@ -64,6 +91,9 @@ class TaskManager {
             task.description = newDescription;
 
             console.log(`Task "${task.title}" has been updated.`);
+
+            // Save after editing task
+            this.saveTasks();
         } else {
             console.log("Task not found!");
             
@@ -78,6 +108,9 @@ class TaskManager {
         if (taskIndex !== -1) {
             const deletedTask = this.taskArray.splice(taskIndex, 1)[0];
             console.log(`Task "${deletedTask.title}" has been deleted.`);
+
+            // Save after deleting task
+            this.saveTasks();
         } else {
             console.log("Task not found!");
         }
@@ -138,7 +171,6 @@ do {
         case 7:
             flag = false;
             console.log("Exiting Task Manager...");
-            
             break;
         default:
             console.log("Invalid choice. Please enter a number between 1 and 7.");
