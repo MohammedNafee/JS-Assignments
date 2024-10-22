@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App </title>
+    <link rel="stylesheet" href="homeStyles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the Quiz App</h1>
+        <p>Select a category to begin the quiz.</p>
+    </header>
+
+    <main>
+        <div class="categorySelection">
+            <a href="htmlQuiz.html?category=html">HTML Quiz</a>
+            <a href="cssQuiz.html?category=css">CSS Quiz</a>
+            <a href="jsQuiz.html?category=js">JavaScript Quiz</a>
+        </div>
+
+        <section class="contactForm">
+            <div class="container">
+                <div class="ctaForm">
+                    <h2>Fill out the form!</h2>
+                    <p>Submit a Question or Ask Us Anything.!</p>
+                </div>
+                <form>
+                    <input type="text" placeholder="Name" class="form__input" id="name" />
+                    <label for="name" class="form__label">Name</label>
+
+                    <input type="text" placeholder="Subject" class="form__input" id="subject" />
+                    <label for="subject" class="form__label">Subject</label>
+
+                    <input type="text" placeholder="Your Message" class="form__input" id="message" />
+                    <label for="message" class="form__label">Yor Message</label>
+
+                    <button type="submit">Send Message</button>
+                </form>
+        </section>
+    </main>
+</body>
+
+</html>
